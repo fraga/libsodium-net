@@ -131,6 +131,35 @@ namespace Sodium
       return final;
     }
 
+    public static byte[] CreateEasy(byte[] message, byte[] nonce, byte[] key, byte[] sharedKey)
+    {
+      if(key == null || key.Length != KEY_BYTES)
+        throw new ArgumentOutOfRangeException("key", (key == null) ? 0 : key.Length,
+          string.Format("key must be {0} bytes in length.", KEY_BYTES));
+
+      //validate the length of the nonce
+      if (nonce == null || nonce.Length != NONCE_BYTES)
+      {
+        throw new ArgumentOutOfRangeException("nonce", (nonce == null) ? 0 : nonce.Length,
+          string.Format("nonce must be {0} bytes in length.", NONCE_BYTES));
+      }
+
+      long textLength = message.LongLength;
+      byte[] buffer = new byte[textLength];
+
+      int ret;
+
+      if (SodiumCore.Is64)
+        ret = _CreateEasy64(buffer, message, textLength, nonce, key, sharedKey);
+      else
+        ret = _CreateEasy32(buffer, message, textLength, nonce, key, sharedKey);
+
+      if (ret != 0)
+        throw new CryptographicException("Failed to open CreateEasy");
+
+      return buffer;
+    }
+
     [DllImport(SodiumCore.LIBRARY_X64, EntryPoint = "crypto_secretbox", CallingConvention = CallingConvention.Cdecl)]
     private static extern int _Create64(byte[] buffer, byte[] message, long messageLength, byte[] nonce, byte[] key);
 
