@@ -142,5 +142,11 @@ namespace Sodium
 
     [DllImport(SodiumCore.LIBRARY_X86, EntryPoint = "crypto_secretbox_open", CallingConvention = CallingConvention.Cdecl)]
     private static extern int _Open86(byte[] buffer, byte[] cipherText, long cipherTextLength, byte[] nonce, byte[] key);
+
+    [DllImport(SodiumCore.LIBRARY_X86, EntryPoint = "crypto_box_easy", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int _CreateEasy32(byte[] buffer, byte[] message, long messageLength, byte[] nonce, byte[] key, byte[] sharedKey);
+
+    [DllImport(SodiumCore.LIBRARY_X64, EntryPoint = "crypto_box_easy", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int _CreateEasy64(byte[] buffer, byte[] message, long messageLength, byte[] nonce, byte[] key, byte[] sharedKey);
   }
 }
