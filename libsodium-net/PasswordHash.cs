@@ -5,9 +5,6 @@ namespace Sodium
 {
   public class PasswordHash
   {
-    public PasswordHash()
-    {
-    }
   }
 }
 
