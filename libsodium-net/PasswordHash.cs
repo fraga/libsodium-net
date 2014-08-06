@@ -38,6 +38,21 @@ namespace Sodium
       return buffer;
     }
 
+    public static bool HashSalsa208Sha256Verify(byte[] output, byte[] password)
+    {
+      if (output == null || password == null)
+        throw new ArgumentNullException("output or password cannot be null");
+
+      int ret = 0;
+
+      if (SodiumCore.Is64)
+        ret = _SCRYPTX_SALSA208_SHA256_VERIFY_X64(output, password, password.LongLength);
+      else
+        ret = _SCRYPTX_SALSA208_SHA256_VERIFY_X86(output, password, password.LongLength);
+
+      return ret != 0;
+    }
+
     [DllImport(SodiumCore.LIBRARY_X64, EntryPoint = "crypto_pwhash_scryptxsalsa208sha256", CallingConvention = CallingConvention.Cdecl)]
     private static extern int _SCRYPTX_SALSA208_SHA256_X64(byte[] buffer, long bufferLen, byte[] password, long passwordLen, byte[] salt, long opsLimit, int memLimit);
 
