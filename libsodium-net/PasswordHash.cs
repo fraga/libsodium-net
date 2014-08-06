@@ -8,6 +8,13 @@ namespace Sodium
   {
     public const uint SCRYPT_SALSA208_SHA256_BYTES = 102U;
 
+    public static string HashSalsa208Sha256(string password, string salt, long opsLimit, int memLimit)
+    {
+      byte[] output = HashSalsa208Sha256(Encoding.UTF8.GetBytes(password), Encoding.UTF8.GetBytes(salt), opsLimit, memLimit);
+
+      return Encoding.UTF8.GetString(output);
+    }
+
     public static byte[] HashSalsa208Sha256(byte[] password, byte[] salt, long opsLimit, int memLimit)
     {
       if (password == null || salt == null)
