@@ -33,7 +33,7 @@ namespace Sodium
         ret = _SCRYPTX_SALSA208_SHA256_X86(buffer, buffer.LongLength, password, password.LongLength, salt, opsLimit, memLimit);
 
       if (ret != 0)
-        throw new Exception(String.Format("Internal error, check for proper libsodium version - {0}", SodiumCore.SodiumVersionString));
+        throw new Exception("Internal error, hash failed");
 
       return buffer;
     }
