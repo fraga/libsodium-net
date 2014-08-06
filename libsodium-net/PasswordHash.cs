@@ -21,7 +21,7 @@ namespace Sodium
         throw new ArgumentNullException("Password and salt cannot be null");
 
       if (opsLimit <= 0 || memLimit <= 0)
-        throw new ArgumentException("opsLimit or memLimit cannot be zero or negative");
+        throw new ArgumentOutOfRangeException("opsLimit or memLimit cannot be zero or negative");
 
       byte[] buffer = new byte[password.LongLength];
 
