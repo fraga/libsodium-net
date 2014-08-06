@@ -38,6 +38,11 @@ namespace Sodium
       return buffer;
     }
 
+    public static bool HashSalsa208Sha256Verify(string output, string password)
+    {
+      return HashSalsa208Sha256Verify(Encoding.UTF8.GetBytes(output), Encoding.UTF8.GetBytes(password));
+    }
+
     public static bool HashSalsa208Sha256Verify(byte[] output, byte[] password)
     {
       if (output == null || password == null)
