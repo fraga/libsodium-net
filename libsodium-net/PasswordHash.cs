@@ -10,9 +10,9 @@ namespace Sodium
 
     public static string HashSalsa208Sha256(string password, string salt, long opsLimit, int memLimit)
     {
-      byte[] output = HashSalsa208Sha256(Encoding.UTF8.GetBytes(password), Encoding.UTF8.GetBytes(salt), opsLimit, memLimit);
+      byte[] output = HashSalsa208Sha256(Utilities.HexToBinary(password), Utilities.HexToBinary(salt), opsLimit, memLimit);
 
-      return Encoding.UTF8.GetString(output);
+      return Utilities.BinaryToHex(output);
     }
 
     public static byte[] HashSalsa208Sha256(byte[] password, byte[] salt, long opsLimit, int memLimit)
