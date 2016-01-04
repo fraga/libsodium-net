@@ -1,4 +1,7 @@
-language: c
+language: csharp
+
+mono:
+ - 4.2
 
 os:
  - osx
@@ -6,6 +9,8 @@ os:
 
 env:
  - TRAVIS_OS_UNAME=$(uname -s)
+
+solution: libsodium-net.sln
 
 install:
  - if [[ $TRAVIS_OS_UNAME = 'Linux' ]]; then bash travis-linux-deps.sh; fi
@@ -15,5 +20,4 @@ before_script:
  - bash travis-build-libsodium.sh
 
 script:
- - xbuild libsodium-net.sln
  - bash nunit-console.sh ./Tests/bin/Debug/Tests.dll
