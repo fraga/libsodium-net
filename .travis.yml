@@ -7,6 +7,9 @@ os:
  - osx
  - linux
 
+env:
+ - TRAVIS_OS_UNAME=$(uname -s)
+
 solution: libsodium-net.sln
 
 install:
